@@ -10,11 +10,11 @@ def homePage():
 
 @app.route('/statistics')
 def statisticsPage():
-    return
+    return render_template("statistics.html")
 
 @app.route('/dynamic')
 def dynamicPage():
-    return
+    return render_template("dynamic.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
