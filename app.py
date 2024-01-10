@@ -4,16 +4,16 @@ app = Flask(__name__)
 
 # This will be the home page
 @app.route('/')
-def homePage():
+def home():
     return render_template("index.html")
 
 
 @app.route('/statistics')
-def statisticsPage():
+def statistics():
     return render_template("statistics.html")
 
 @app.route('/dynamic')
-def dynamicPage():
+def dynamic():
     return render_template("dynamic.html")
 
 if __name__ == '__main__':

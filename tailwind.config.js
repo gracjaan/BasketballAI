@@ -5,7 +5,16 @@ module.exports = {
     "./static/src/**/*.js"
   ],
   theme: {
-    extend: {},
+    colors: {
+      primary: '#d9d9d9' 
+    },
+    extend: {
+      fontFamily: {
+        'montserrat': ['Montserrat'],
+        'lato': ['Lato'],
+        'garamond': ['Garamond']
+    }
+    },
   },
   plugins: [],
 }
