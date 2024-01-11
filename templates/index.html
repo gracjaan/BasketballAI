@@ -7,6 +7,8 @@
     <title>Flowbite Flask</title>
     <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto&display=swap" rel="stylesheet">
+    <script src="{{ url_for('static', filename='home.js') }}"></script>
+
 </head>
 <body class="p-4 font-montserrat">
     <header class="flex justify-between items-center mb-6">
@@ -19,41 +21,22 @@
     </header>
     <main>
         <h2 class="text-xl mb-4">Choose a scenario you will play today or check out our newest feature: Dynamic scenario!</h2>
-        <a href="{{ url_for('statistics') }}">
+        <a href="{{ url_for('dynamic') }}">
             <div class="bg-primary h-28 w-100% mb-3 rounded-xl">
                 <p class="p-4 font-montserrat font-bold">Dynamic Mode</p>
             </div>
         </a>
         <div>
-            <ol class="space-y-3">
+            <ol class="space-y-3" id="soundList">
                 <li class="flex items-center justify-between bg-primary rounded-xl py-2 px-4">
                     <div>
                         <p class="font-bold">2016 NBA Finals</p>
                     </div>
                     <div class= "rounded-xl">
-                        <img src="../static/assets/Frameplay.svg" alt="playButton">
-                    </div>
-                </li>
-                <li class="flex items-center justify-between bg-primary rounded-xl py-2 px-4">
-                    <div>
-                        <p class="font-bold">MJ's Flu Game</p>
-                    </div>
-                    <div class= "rounded-xl">
-                        <img src="../static/assets/Framepause.svg" alt="playButton">
-                    </div>
-                </li><li class="flex items-center justify-between bg-primary rounded-xl py-2 px-4">
-                    <div>
-                        <p class="font-bold">1997 NBA Finals</p>
-                    </div>
-                    <div class= "rounded-xl">
-                        <img src="../static/assets/Frameplay.svg" alt="playButton">
-                    </div>
-                </li><li class="flex items-center justify-between bg-primary rounded-xl py-2 px-4">
-                    <div>
-                        <p class="font-bold">Kobe's 81 points game</p>
-                    </div>
-                    <div class= "rounded-xl">
-                        <img src="../static/assets/Frameplay.svg" alt="playButton">
+                        <img id="playPause" onclick="playSound()" src="../static/assets/Frameplay.svg" alt="playButton">
+                        <audio class="hidden" id="audioPlayer" controls>
+                            <source src="{{ url_for('static', filename='commentary.mp3') }}" type="audio/mp3">
+                        </audio>
                     </div>
                 </li>
             </ol>
