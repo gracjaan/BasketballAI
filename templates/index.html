@@ -1,47 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flowbite Flask</title>
-    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto&display=swap" rel="stylesheet">
-    <script src="{{ url_for('static', filename='home.js') }}"></script>
-
-</head>
-<body class="p-4 font-montserrat">
-    <header class="flex justify-between items-center mb-6">
-        <div class="text-3xl font-bold">
-            <h1>Scenarario's</h1>
-        </div>
-        <div class="bg-primary rounded-xl p-4">
-            <img src="../static/assets/FramemenuChart.svg" alt="menuIcon">
-        </div>
-    </header>
-    <main>
-        <h2 class="text-xl mb-4">Choose a scenario you will play today or check out our newest feature: Dynamic scenario!</h2>
-        <a href="{{ url_for('dynamic') }}">
-            <div class="bg-primary h-28 w-100% mb-3 rounded-xl">
-                <p class="p-4 font-montserrat font-bold">Dynamic Mode</p>
-            </div>
-        </a>
-        <div>
-            <ol class="space-y-3" id="soundList">
-                <li class="flex items-center justify-between bg-primary rounded-xl py-2 px-4">
-                    <div>
-                        <p class="font-bold">2016 NBA Finals</p>
-                    </div>
-                    <div class= "rounded-xl">
-                        <img id="playPause" onclick="playSound()" src="../static/assets/Frameplay.svg" alt="playButton">
-                        <audio class="hidden" id="audioPlayer" controls>
-                            <source src="{{ url_for('static', filename='commentary.mp3') }}" type="audio/mp3">
-                        </audio>
-                    </div>
-                </li>
-            </ol>
-        </div>
-    </main>
-
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Flowbite Flask</title>
+		<link
+			rel="stylesheet"
+			href="{{url_for('static',filename='dist/css/output.css')}}"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto&display=swap"
+			rel="stylesheet"
+		/>
+		<script
+			defer
+			src="{{ url_for('static', filename='home.js') }}"
+		></script>
+	</head>
+	<body class="p-4 font-montserrat">
+		<header class="flex justify-between items-center mb-6">
+			<div class="text-3xl font-bold">
+				<h1>Scenarario's</h1>
+			</div>
+			<div class="bg-primary rounded-xl p-4">
+				<img src="../static/assets/FramemenuChart.svg" alt="menuIcon" />
+			</div>
+		</header>
+		<main>
+			<h2 class="text-xl mb-4">
+				Choose a scenario you will play today or check out our newest
+				feature: Dynamic scenario!
+			</h2>
+			<a href="{{ url_for('dynamic') }}">
+				<div class="bg-primary h-28 w-100% mb-3 rounded-xl">
+					<p class="p-4 font-montserrat font-bold">Dynamic Mode</p>
+				</div>
+			</a>
+			<div>
+				<ol class="space-y-3" id="soundList"></ol>
+			</div>
+		</main>
+	</body>
 </html>
