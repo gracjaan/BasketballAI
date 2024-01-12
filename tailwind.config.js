@@ -2,10 +2,10 @@
 module.exports = {
 	content: ["./templates/**/*.html", "./static/**/*.js"],
 	theme: {
-		colors: {
-			primary: "#d9d9d9",
-		},
 		extend: {
+			colors: {
+				primary: "#d9d9d9",
+			},
 			fontFamily: {
 				montserrat: ["Montserrat"],
 				lato: ["Lato"],

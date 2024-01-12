@@ -1,13 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flowbite Flask</title>
-    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
-</head>
-<body>
-    <h1 class="text-blue-600">Hello, statistics!</h1>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Flowbite Flask</title>
+		<link
+			rel="stylesheet"
+			href="{{url_for('static',filename='dist/css/output.css')}}"
+		/>
+		<link
+			rel="stylesheet"
+			href="{{url_for('static',filename='dist/css/output.css')}}"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto&display=swap"
+			rel="stylesheet"
+		/>
+		<script
+			defer
+			src="{{ url_for('static', filename='speech.js') }}"
+		></script>
+	</head>
+	<body class="p-4 font-montserrat">
+		<div
+			id="speech-overlay"
+			class="fixed top-0 left-0 right-0 bottom-0 bg-black/40 p-4 invisible transition-opacity opacity-0"
+		>
+			<div class="min-h-14 bg-primary w-full rounded-xl">
+				<p id="speech-output" class="p-4 font-montserrat font-bold"></p>
+			</div>
+		</div>
+		<h1 class="text-blue-600">Hello, statistics!</h1>
+	</body>
 </html>

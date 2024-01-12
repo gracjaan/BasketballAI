@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Flowbite Flask</title>
+		<title>Basketball Vibe</title>
 		<link
 			rel="stylesheet"
 			href="{{url_for('static',filename='dist/css/output.css')}}"
@@ -17,11 +17,23 @@
 			defer
 			src="{{ url_for('static', filename='home.js') }}"
 		></script>
+		<script
+			defer
+			src="{{ url_for('static', filename='speech.js') }}"
+		></script>
 	</head>
 	<body class="p-4 font-montserrat">
+		<div
+			id="speech-overlay"
+			class="fixed top-0 left-0 right-0 bottom-0 bg-black/40 p-4 invisible transition-opacity opacity-0"
+		>
+			<div class="min-h-14 bg-primary w-full rounded-xl">
+				<p id="speech-output" class="p-4 font-montserrat font-bold"></p>
+			</div>
+		</div>
 		<header class="flex justify-between items-center mb-6">
 			<div class="text-3xl font-bold">
-				<h1>Scenarario's</h1>
+				<h1>Scenario's</h1>
 			</div>
 			<div class="bg-primary rounded-xl p-4">
 				<img src="../static/assets/FramemenuChart.svg" alt="menuIcon" />
@@ -33,13 +45,14 @@
 				feature: Dynamic scenario!
 			</h2>
 			<a href="{{ url_for('dynamic') }}">
-				<div class="bg-primary h-28 w-100% mb-3 rounded-xl">
+				<div class="bg-primary h-28 w-full mb-3 rounded-xl">
 					<p class="p-4 font-montserrat font-bold">Dynamic Mode</p>
 				</div>
 			</a>
 			<div>
 				<ol class="space-y-3" id="soundList"></ol>
 			</div>
+			<div id="output"></div>
 		</main>
 	</body>
 </html>

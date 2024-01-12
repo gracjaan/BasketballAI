@@ -1,9 +1,40 @@
+const files = ["buzzer", "commentary", "swish"];
 async function insertSounds() {
-	const files = ["buzzer", "commentary", "swish"];
 	console.log(files);
 	for (let i = 0; i < files.length; i++) {
 		const fileName = files[i];
 		generateSoundList(fileName);
+	}
+
+	if (new URLSearchParams(window.location.search).has("scenario")) {
+		const scenario = new URLSearchParams(window.location.search).get(
+			"scenario"
+		);
+
+		if (scenario.toLowerCase().startsWith("dynamic")) {
+			window.location.href = "/dynamic";
+		} else if (scenario.toLowerCase().startsWith("statist")) {
+			window.location.href = "/statistics";
+		} else {
+			playFromVoice(scenario.toLowerCase());
+		}
+	}
+}
+
+function playFromVoice(scenario) {
+	let selectedFile = null;
+	for (const file of files) {
+		if (scenario.startsWith(file.substring(0, 5))) {
+			selectedFile = file;
+			break;
+		}
+	}
+
+	if (selectedFile !== null) {
+		const audioPlayer = document.getElementById(
+			"audioPlayer-" + selectedFile
+		);
+		playSound(audioPlayer);
 	}
 }
 
@@ -41,14 +72,14 @@ function generateSoundList(soundTitel) {
 
 	// Create an image for the play/pause button
 	const playPauseButton = document.createElement("img");
-	playPauseButton.id = "playPause";
+	playPauseButton.id = "playPause-" + soundTitel;
 	playPauseButton.src = "../static/assets/Frameplay.svg";
 	playPauseButton.alt = "playButton";
 
 	// Create an audio element
 	const audioPlayer = document.createElement("audio");
 	audioPlayer.classList.add("hidden");
-	audioPlayer.id = "audioPlayer";
+	audioPlayer.id = "audioPlayer-" + soundTitel;
 	audioPlayer.controls = true;
 	audioPlayer.addEventListener("pause", () => {
 		playPauseButton.src = "../static/assets/Frameplay.svg";
