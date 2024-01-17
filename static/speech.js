@@ -1,6 +1,7 @@
 const parentDiv = document.getElementById("speech-overlay");
 const outputDiv = document.getElementById("speech-output");
 const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+recognition.lang = "en-US";
 let recognizingTimer = -1;
 
 recognition.interimResults = true;

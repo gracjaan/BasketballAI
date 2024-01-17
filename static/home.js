@@ -1,4 +1,4 @@
-const files = ["buzzer", "commentary", "swish"];
+const files = ["finals 2016", "finals 2023", "kobe bryant", "michael jordan"];
 async function insertSounds() {
 	console.log(files);
 	for (let i = 0; i < files.length; i++) {
@@ -24,7 +24,7 @@ async function insertSounds() {
 function playFromVoice(scenario) {
 	let selectedFile = null;
 	for (const file of files) {
-		if (scenario.startsWith(file.substring(0, 5))) {
+		if (scenario.startsWith(file.substring(0, 10))) {
 			selectedFile = file;
 			break;
 		}
@@ -34,11 +34,11 @@ function playFromVoice(scenario) {
 		const audioPlayer = document.getElementById(
 			"audioPlayer-" + selectedFile
 		);
-		playSound(audioPlayer);
+		playEffect(audioPlayer);
 	}
 }
 
-function playSound(source) {
+function playEffect(source) {
 	if (source.paused) {
 		source.play();
 	} else {
@@ -62,7 +62,7 @@ function generateSoundList(soundTitel) {
 
 	const titleDiv = document.createElement("div");
 	const titlePara = document.createElement("p");
-	titlePara.classList.add("font-bold");
+	titlePara.classList.add("font-bold", "capitalize");
 	titlePara.innerText = soundTitel;
 	titleDiv.appendChild(titlePara);
 	listElement.appendChild(titleDiv);
@@ -88,7 +88,7 @@ function generateSoundList(soundTitel) {
 	audioPlayer.addEventListener("play", () => {
 		playPauseButton.src = "../static/assets/Framepause.svg";
 	});
-	playPauseButton.onclick = playSound.bind(null, audioPlayer);
+	playPauseButton.onclick = playEffect.bind(null, audioPlayer);
 
 	// Create a source element for the audio file
 	const audioSource = document.createElement("source");
@@ -109,11 +109,14 @@ function generateSoundList(soundTitel) {
 	orderedSoundList.appendChild(listElement);
 }
 
-const hasInteracted = () =>
-	new Audio("/static/sounds/buzzer.mp3")
+const hasInteracted = () => {
+	const audio = new Audio("/static/effects/swish.mp3");
+	audio.muted = true;
+	return audio
 		.play()
 		.then(() => true)
 		.catch(() => false);
+};
 
 function hideInteractionOverlay() {
 	const interactionDiv = document.getElementById("interaction-overlay");
