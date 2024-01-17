@@ -82,7 +82,7 @@ def receive_image(image):
     processed_img_data = base64.b64encode(frame_encoded).decode()
     b64_src = "data:image/jpg;base64,"
     processed_img_data = b64_src + processed_img_data
-    emit("processed_image", processed_img_data)
+    emit("processed_image", {"data": processed_img_data, "score": detector.makes, "attempts": detector.attempts})
 
 
 if __name__ == '__main__':
