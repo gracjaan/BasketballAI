@@ -136,7 +136,7 @@ function showInteractionOverlay() {
 
 	if (!(await hasInteracted())) {
 		navigator.mediaDevices
-			.getUserMedia({ video: false, audio: true })
+			.getUserMedia({ video: true, audio: true })
 			.catch(() => {});
 
 		showInteractionOverlay();

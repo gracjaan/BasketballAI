@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Basketball vibe</title>
+		<title>Arena Atmostphere</title>
 		<link
 			rel="stylesheet"
 			href="{{url_for('static',filename='dist/css/output.css')}}"
@@ -17,6 +17,18 @@
 			defer
 			src="{{ url_for('static', filename='speech.js') }}"
 		></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.min.js"></script>
+
+		<div id="container">
+			<video autoplay playsinline id="videoElement"></video>
+			<canvas id="canvas" width="400" height="300"></canvas>
+		</div>
+
+		<div class="video">
+			<img id="photo" width="400" height="300" />
+			<!-- <h1>video</h1> -->
+		</div>
+		<script src="{{ url_for('static',filename='dynamic.js') }}"></script>
 	</head>
 	<body class="p-4 font-montserrat">
 		<div
