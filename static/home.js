@@ -56,7 +56,7 @@ function generateSoundList(soundTitel) {
 		"justify-between",
 		"bg-primary",
 		"rounded-xl",
-		"py-2",
+		"py-4",
 		"px-4"
 	);
 
@@ -72,6 +72,7 @@ function generateSoundList(soundTitel) {
 
 	// Create an image for the play/pause button
 	const playPauseButton = document.createElement("img");
+	playPauseButton.classList.add("w-8", "h-8");
 	playPauseButton.id = "playPause-" + soundTitel;
 	playPauseButton.src = "../static/assets/Frameplay.svg";
 	playPauseButton.alt = "playButton";
@@ -108,4 +109,36 @@ function generateSoundList(soundTitel) {
 	orderedSoundList.appendChild(listElement);
 }
 
-insertSounds();
+const hasInteracted = () =>
+	new Audio("/static/sounds/buzzer.mp3")
+		.play()
+		.then(() => true)
+		.catch(() => false);
+
+function hideInteractionOverlay() {
+	const interactionDiv = document.getElementById("interaction-overlay");
+	interactionDiv.classList.add("opacity-0");
+	setTimeout(() => {
+		interactionDiv.classList.add("invisible");
+	}, 200);
+
+	window.location.reload();
+}
+
+function showInteractionOverlay() {
+	const interactionDiv = document.getElementById("interaction-overlay");
+	interactionDiv.classList.remove("opacity-0");
+	interactionDiv.classList.remove("invisible");
+}
+
+(async () => {
+	insertSounds();
+
+	if (!(await hasInteracted())) {
+		navigator.mediaDevices
+			.getUserMedia({ video: false, audio: true })
+			.catch(() => {});
+
+		showInteractionOverlay();
+	}
+})();

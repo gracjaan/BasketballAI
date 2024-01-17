@@ -32,13 +32,37 @@
 				<p id="speech-output" class="font-montserrat"></p>
 			</div>
 		</div>
+		<div
+			id="interaction-overlay"
+			class="fixed top-0 left-0 right-0 bottom-0 bg-black/40 p-4 invisible transition-opacity opacity-0"
+		>
+			<div class="min-h-14 p-4 bg-primary w-full rounded-xl space-y-1">
+				<p class="font-montserrat text-lg font-bold">
+					Allow Interactions
+				</p>
+				<p class="font-montserrat">
+					Please allow microphone usage for voice commands and click
+					on the confirm button to allow playing of sounds.
+				</p>
+				<button
+					onclick="hideInteractionOverlay()"
+					class="bg-secondary px-3 py-2 rounded-lg font-bold"
+				>
+					Confirm
+				</button>
+			</div>
+		</div>
 		<header class="flex justify-between items-center mb-6">
 			<div class="text-3xl font-bold">
 				<h1>Scenario's</h1>
 			</div>
-			<div class="bg-primary rounded-xl p-4">
+			<div class="bg-primary rounded-xl p-3">
 				<a href="{{ url_for('statistics') }}">
-					<img src="../static/assets/FrameMenuChart.svg" alt="menuIcon" />
+					<img
+						class="w-6 h-6"
+						src="../static/assets/FrameMenuChart.svg"
+						alt="menuIcon"
+					/>
 				</a>
 			</div>
 		</header>
