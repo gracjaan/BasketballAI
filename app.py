@@ -1,4 +1,6 @@
-from flask import Flask, render_template
+import uuid
+from flask import Flask, render_template, session
+
 import base64
 
 import cv2
@@ -11,7 +13,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "secret!"
 socketio = SocketIO(app, async_mode="threading")
 
-detector = ShotDetector()
+detectors = {}
 
 # This will be the home page
 @app.route('/')
@@ -55,8 +57,21 @@ def test_connect():
     print("Connected")
     emit("my response", {"data": "Connected"})
     
+@socketio.on("gen_id")
+def gen_id(id):
+    if (id in detectors):
+        emit("gen_id", {"data": "Connected", "id": id})
+        return
+
+    id = str(uuid.uuid4())
+    while (id in detectors):
+        id = str(uuid.uuid4())
+
+    detectors[id] = ShotDetector()
+    emit("gen_id", {"id": id})
+    
 @socketio.on("image")
-def receive_image(image):
+def receive_image(data):
     """
     The receive_image function takes in an image from the webcam, converts it to grayscale, and then emits
     the processed image back to the client.
@@ -66,13 +81,17 @@ def receive_image(image):
     :return: The image that was received from the client
     """
     # Decode the base64-encoded image data
-    image = base64_to_image(image)
+    image = base64_to_image(data['data'])
 
     # Process the image
     # gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     # frame_resized = cv2.resize(gray, (400, 300))
 
-    frame_encoded = detector.run_once(image)
+    id = data['id']
+    if (id not in detectors):
+        return
+
+    frame_encoded = detectors[id].run_once(image)
 
     # Encode the image data to jpg
     encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
@@ -82,7 +101,14 @@ def receive_image(image):
     processed_img_data = base64.b64encode(frame_encoded).decode()
     b64_src = "data:image/jpg;base64,"
     processed_img_data = b64_src + processed_img_data
-    emit("processed_image", {"data": processed_img_data, "score": detector.makes, "attempts": detector.attempts})
+    emit("processed_image", {"data": processed_img_data, "score": detectors[id].makes, "attempts": detectors[id].attempts})
+    
+@socketio.on("stats")
+def receive_stats(id):
+    if (id not in detectors):
+        return
+
+    emit("stats_data", { "score": detectors[id].makes, "attempts": detectors[id].attempts})
 
 
 if __name__ == '__main__':

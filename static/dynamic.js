@@ -10,6 +10,11 @@ var socket = io.connect(
 );
 socket.on("connect", function () {
 	console.log("Connected...!", socket.connected);
+
+	socket.emit("gen_id", localStorage.getItem("id"));
+});
+socket.on("gen_id", function ({ id }) {
+	localStorage.setItem("id", id);
 });
 
 var canvas = document.getElementById("canvas");
@@ -43,7 +48,7 @@ setInterval(() => {
 	context.drawImage(video, 0, 0, width, height);
 	var data = canvas.toDataURL("image/jpeg", 0.5);
 	context.clearRect(0, 0, width, height);
-	socket.emit("image", data);
+	socket.emit("image", { id: localStorage.getItem("id"), data });
 }, 1000 / FPS);
 
 let previous = {

@@ -17,9 +17,14 @@
 			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto&display=swap"
 			rel="stylesheet"
 		/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.min.js"></script>
 		<script
 			defer
 			src="{{ url_for('static', filename='speech.js') }}"
+		></script>
+		<script
+			defer
+			src="{{ url_for('static',filename='statistics.js') }}"
 		></script>
 	</head>
 	<body class="p-4 font-montserrat">
@@ -56,22 +61,25 @@
 					class="flex justify-between items-center mb-6 py-4 border-b"
 				>
 					<p class="py-4 font-montserrat font-bold">Shots made</p>
-					<p class="py-4 font-montserrat text-xl">75</p>
+					<p id="score" class="py-4 font-montserrat text-xl">0</p>
 				</li>
 				<li class="flex justify-between items-center mb-6 border-b">
 					<p class="py-4 font-montserrat font-bold">
 						Shots attempted
 					</p>
-					<p class="py-4 font-montserrat text-xl">100</p>
+					<p id="attempts" class="py-4 font-montserrat text-xl">0</p>
 				</li>
 				<li class="flex justify-between items-center mb-6 border-b">
 					<p class="py-4 font-montserrat font-bold">Percentage</p>
-					<p class="py-4 font-montserrat text-xl">75%</p>
+					<p id="percentage" class="py-4 font-montserrat text-xl">
+						0%
+					</p>
 				</li>
-				<li class="flex justify-between items-center mb-6 border-b">
+				<!-- Not currently a way of tracking this -->
+				<!-- <li class="flex justify-between items-center mb-6 border-b">
 					<p class="py-4 font-montserrat font-bold">Scenarios used</p>
 					<p class="py-4 font-montserrat text-xl">99</p>
-				</li>
+				</li> -->
 			</ol>
 		</main>
 	</body>
