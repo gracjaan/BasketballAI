@@ -29,16 +29,17 @@ recognition.onresult = (event) => {
 
 	if (
 		event.results[event.results.length - 1].isFinal &&
-		result.startsWith("scenari")
+		result.toLowerCase().startsWith("scenari")
 	) {
 		const [_, ...scenario] = result.split(" ");
 		if (scenario.length === 0) {
 			return;
 		}
 
-		window.location.href =
+		window.location.assign(
 			"/?scenario=" +
-			scenario.filter((x) => x.toLowerCase() !== "play").join(" ");
+				scenario.filter((x) => x.toLowerCase() !== "play").join(" ")
+		);
 	}
 };
 

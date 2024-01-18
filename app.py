@@ -60,8 +60,7 @@ def test_connect():
 @socketio.on("gen_id")
 def gen_id(id):
     if (id in detectors):
-        emit("gen_id", {"data": "Connected", "id": id})
-        return
+        return emit("gen_id", {"data": "Connected", "id": id})
 
     id = str(uuid.uuid4())
     while (id in detectors):
@@ -112,4 +111,5 @@ def receive_stats(id):
 
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True, port=5000, host='0.0.0.0')
+    context = ('server.crt', 'server.key')
+    socketio.run(app, debug=True, port=5000, host='0.0.0.0', ssl_context=context)
